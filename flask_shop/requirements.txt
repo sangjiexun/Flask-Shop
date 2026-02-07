@@ -1,0 +1,8 @@
+Flask
+Flask-SQLAlchemy
+Flask-Security
+Flask-Mail
+Flask-Babel
+Flask-Uploads
+Pillow
+psycopg2-binary

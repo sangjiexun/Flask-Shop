@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Products</h2>
+{% if products %}
+    <ul>
+        {% for product in products %}
+            <li>
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.desc }}</p>
+                <p>Price: {{ product.price|format_currency }}</p>
+                <img src="{{ url_for('product_picture', filename='tn_'+product.pic) }}" alt="{{ product.name }}">
+                <form action="{{ url_for('buy') }}" method="post">
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <input type="number" name="quantity" value="1" min="1">
+                    <input type="submit" value="Buy">
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="pagination">
+        {% for i in range(1, max_page + 1) %}
+            <a href="{{ url_for('search', page=i) }}">{{ i }}</a>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No products available.</p>
+{% endif %}
+{% endblock %}

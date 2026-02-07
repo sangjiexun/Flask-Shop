@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Orders</h2>
+{% if orders %}
+    <ul>
+        {% for order in orders %}
+            <li>
+                <a href="{{ url_for('order', id=order.id) }}">Order #{{ order.id }}</a>
+                <p>State: {{ order.state }}</p>
+                <p>Created: {{ order.created|format_datetime }}</p>
+                <p>Total: {{ order.total()|format_currency }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No orders available.</p>
+{% endif %}
+{% endblock %}
